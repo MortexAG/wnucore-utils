@@ -33,9 +33,9 @@ pub enum FileType {
 // tbh i dont really understand that unix thing
 #[cfg(unix)]
 fn is_executable(metadata: &fs::Metadata) -> bool {
-    use std::{fs::metadata, os::unix::fs::PermissionsExt};
+    use std::os::unix::fs::PermissionsExt;
     let mode = metadata.permissions().mode();
-    mode &0o11 != 0 // any executable bit set (owner/group/others)
+    mode & 0o111 != 0 // executable by owner, group, or others
 }
 
 #[cfg(windows)]
@@ -59,7 +59,9 @@ pub fn list_dir(path: &str) -> io::Result<Vec<(String,FileType)>>{ // this is be
         for entry in fs::read_dir(path)? {
             let entry = entry?;
             let file_name = entry.file_name().to_string_lossy().into_owned(); // using to string lossy to not fail if fail if the filename is not valid UTF-8
+            #[cfg(windows)]
             let path = entry.path();
+            
             let metadata = entry.metadata()?;
               let file_type = if metadata.is_dir() { // setting the file type according to the checks using the FileType enum
                 FileType::Directory
