@@ -52,7 +52,7 @@ mod tests {
 
     #[test]
     fn test_lsw() -> Result<(), Box<dyn Error>> {
-        let path = "./tests/lsw"; // this directory should contain known test files
+        let path = "./tests/my-test/lsw"; // this directory should contain known test files
         let entries = list_dir(path)?;
 
         // Extract just the names for comparison

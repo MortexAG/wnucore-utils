@@ -49,7 +49,7 @@ mod tests {
     #[test]
     fn test_grep_basic_match() {
         // Create temp file with known content
-        let path = "./tests/grep_test.txt";
+        let path = "./tests/my-test/grep_test.txt";
         let mut file = File::create(path).expect("Failed to create test file");
         writeln!(file, "Hello\nWorld\nHello Rust").expect("Failed to write to test file");
 

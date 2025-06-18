@@ -28,8 +28,6 @@ Example:
     Ok(())
 }
 
-
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -39,7 +37,7 @@ mod tests {
     #[test]
     fn test_cat() -> Result<(), Box<dyn Error>> {
         // Ensure the test directory exists
-        let dir_path = "./tests";
+        let dir_path = "./tests/my-test";
         fs::create_dir_all(dir_path)?;
 
         // Define the test file path and content
